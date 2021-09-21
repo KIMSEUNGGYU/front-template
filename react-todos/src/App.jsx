@@ -4,14 +4,20 @@ import "./App.css";
 import Header from "./components/Header";
 import ItemAppender from "./components/ItemAppender";
 import TodoList from "./components/TodoList";
+import TodoListFooter from "./components/TodoListFooter";
+
+import { getTodoListByFilter } from "./services/service";
 
 const initState = [
   { id: 1632152706185, text: "테스트입니다", done: false },
   { id: 1632152711567, text: "안녕하세요", done: false },
 ];
 
+// FILTER = ALL | ACTIVE | COMPLETED
+
 function App() {
   const [todoList, setTodoList] = useState(initState);
+  const [filter, setFilter] = useState("all");
 
   const onAddTodo = (todoItem) => {
     setTodoList(todoList.concat(todoItem));
@@ -28,6 +34,10 @@ function App() {
             };
       })
     );
+  };
+
+  const onChangeFilter = (filter) => {
+    setFilter(filter);
   };
 
   const onUpdateItemText = (itemId, text) => {
@@ -57,20 +67,17 @@ function App() {
       <main className="todoapp">
         <ItemAppender onAddTodo={onAddTodo} />
         <TodoList
-          todoList={todoList}
+          todoList={getTodoListByFilter(todoList, filter)}
           onUpdateToggleItem={onUpdateToggleItem}
           onUpdateItemText={onUpdateItemText}
           onDeleteItem={onDeleteItem}
         />
 
-        <div className="todo-list-footer">
-          <span className="todo-count">총 2개</span>
-          <ul className="filters">
-            <li key="all">전체보기</li>
-            <li key="tobe">해야할 일</li>
-            <li key="done">완료한 일</li>
-          </ul>
-        </div>
+        <TodoListFooter
+          todoList={getTodoListByFilter(todoList, filter)}
+          filter={filter}
+          onChangeFilter={onChangeFilter}
+        />
       </main>
     </>
   );
