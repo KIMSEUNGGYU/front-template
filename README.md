@@ -30,7 +30,8 @@ front-end 학습용 간단 서비스 템플릿 저장소
 
 ## TODOS APP
 
-![todo-list-app-template](https://user-images.githubusercontent.com/45627868/133920880-f8834022-a473-4687-8232-0c047ff2cf05.png)
+![todo-list-app-template](https://user-images.githubusercontent.com/45627868/134390005-8d774f88-c0b3-4af7-bc53-bcc63c0b3f09.png)
+
 
 ```html
 <body>
