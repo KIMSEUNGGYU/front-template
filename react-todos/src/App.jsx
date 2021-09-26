@@ -1,23 +1,20 @@
 import { useState } from "react";
-import "./App.css";
 
 import Header from "./components/Header";
 import ItemAppender from "./components/ItemAppender";
 import TodoList from "./components/TodoList";
 import TodoListFooter from "./components/TodoListFooter";
 
-import { getTodoListByFilter } from "./services/service";
+import { getTodoListByFilter } from "./lib/todos";
 
 const initState = [
   { id: 1632152706185, text: "테스트입니다", done: false },
   { id: 1632152711567, text: "안녕하세요", done: false },
 ];
 
-// FILTER = ALL | ACTIVE | COMPLETED
-
 function App() {
   const [todoList, setTodoList] = useState(initState);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("all"); // FILTER = ALL | ACTIVE | COMPLETED
 
   const onAddTodo = (todoItem) => {
     setTodoList(todoList.concat(todoItem));
@@ -43,10 +40,6 @@ function App() {
   const onUpdateItemText = (itemId, text) => {
     setTodoList(
       todoList.map((todoItem) => {
-        if (todoItem.id !== itemId) {
-          console.log("fsdfa", todoItem);
-        }
-
         return todoItem.id !== itemId
           ? todoItem
           : {
